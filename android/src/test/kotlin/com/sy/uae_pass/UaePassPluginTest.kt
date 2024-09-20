@@ -1,4 +1,4 @@
-package com.mvpapps.uae_pass_flutter
+package sy.uae_pass_flutter_sdk
 
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel

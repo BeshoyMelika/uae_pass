@@ -1,4 +1,4 @@
-name: uae_pass_flutter
+name: uae_pass_flutter_sdk
 description: A UAE Pass plugin for Flutter for iOS and Android only. This is an unofficial version. This is forked from https://github.com/Faisalkc4u/uae_pass
 version: 0.0.4
 homepage: https://github.com/satpal002/uae_pass
@@ -37,7 +37,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.mvpapps.uae_pass_flutter
+        package: sy.uae_pass_flutter_sdk
         pluginClass: UaePassFlutterPlugin
       ios:
         pluginClass: UaePassPlugin

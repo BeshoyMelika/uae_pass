@@ -1,4 +1,4 @@
-package com.mvpapps.uae_pass_flutter
+package sy.uae_pass_flutter_sdk
 
 import ae.sdg.libraryuaepass.*
 import ae.sdg.libraryuaepass.UAEPassController.getAccessToken
