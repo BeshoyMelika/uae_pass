@@ -31,22 +31,25 @@ public class UaePassPlugin: NSObject, FlutterPlugin {
     // map the arguments to the expected data type
       if let arguments = call.arguments as? [String: Any]{
         let clientID = arguments["client_id"] as! String
-
         let clientSecret = arguments["client_secret"] as! String
         let environment = arguments["environment"] as! String
         let env = environment == "production" ? UAEPASSEnvirnonment.production : UAEPASSEnvirnonment.staging
-        let redirectUriLogin = arguments["redirect_uri_login"] as! String
+        let redirectUriLogin = arguments["redirect_url"] as? String ?? "https://oauthtest.com/authorization/return"
         let state = arguments["state"] as! String
         let scope = arguments["scope"] as! String
-        UAEPASSRouter.shared.environmentConfig = UAEPassConfig(clientID: clientID, clientSecret: clientSecret, env: env)
 
-        UAEPASSRouter.shared.spConfig = SPConfig(redirectUriLogin: "https://oauthtest.com/authorization/return",
-                                                 scope: scope,
-                                                 state:state,  
-                                                 successSchemeURL: redirectUriLogin+"://",
-                                                 failSchemeURL: redirectUriLogin+"://",
-                                                 signingScope: "urn:safelayer:eidas:sign:process:document")
+       UAEPASSRouter.shared.environmentConfig = UAEPassConfig(clientID: clientID, clientSecret: clientSecret, env: env)
+
+          UAEPASSRouter.shared.spConfig = SPConfig(
+              redirectUriLogin: redirectUriLogin,
+              scope: scope,
+              state: state,
+              successSchemeURL: redirectUriLogin + "://",
+              failSchemeURL: redirectUriLogin + "://",
+              signingScope: "urn:safelayer:eidas:sign:process:document"
+          )
       }
+
     case "auth_token":
       if let arguments = call.arguments as? [String: Any]{
         let code = arguments["code"] as! String
