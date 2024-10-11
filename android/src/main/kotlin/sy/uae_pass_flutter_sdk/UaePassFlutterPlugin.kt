@@ -25,7 +25,7 @@ import ae.sdg.libraryuaepass.business.Language
 import ae.sdg.libraryuaepass.utils.Utils.generateRandomString
 
 // create a class that implements the PluginRegistry.NewIntentListener interface
- 
+
 
 
 /** UaePassPlugin */
@@ -43,7 +43,8 @@ class UaePassFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware,Plug
   private var failureHost: String? = null
   private var successHost: String? = null
   private var scope: String? = "urn:uae:digitalid:profile"
-   
+  private var language = Language.EN
+
 
 
   private  val UAE_PASS_PACKAGE_ID = "ae.uaepass.mainapp"
@@ -83,7 +84,7 @@ class UaePassFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware,Plug
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, "uae_pass")
     channel.setMethodCallHandler(this)
- 
+
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
@@ -91,16 +92,20 @@ class UaePassFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware,Plug
     if(call.method=="set_up_environment")
     {
       CookieManager.getInstance().removeAllCookies { }
-      CookieManager.getInstance().flush() 
+      CookieManager.getInstance().flush()
       client_id = call.argument<String>("client_id")
       client_secret = call.argument<String>("client_secret")
       redirect_url = call.argument<String?>("redirect_url")
       environment = if(call.argument<String>("environment")!=null && call.argument<String>("environment") == "production")  Environment.PRODUCTION else Environment.STAGING
       state = call.argument<String?>("state")
       scheme = call.argument<String>("scheme")
-      failureHost = call.argument<String?>("failureHost") 
+      failureHost = call.argument<String?>("failureHost")
       successHost = call.argument<String?>("successHost")
       scope = call.argument<String?>("scope")
+      val languageCode: String? = call.argument<String?>("language")
+      if (languageCode?.startsWith("ar", true) == true) {
+        language = Language.AR
+      }
       if(redirect_url==null)
       {
         redirect_url = "https://oauthtest.com/authorization/return"
@@ -118,7 +123,7 @@ class UaePassFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware,Plug
       {
         successHost = "success"
       }
-       
+
     }else if(call.method=="sign_out")
     {
 
@@ -126,28 +131,28 @@ class UaePassFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware,Plug
       CookieManager.getInstance().flush()
     }
     else if(call.method=="sign_in")
-    { 
+    {
       requestModel = getAuthenticationRequestModel(activity!!)
 
       getAccessCode(activity!!, requestModel, object : UAEPassAccessCodeCallback {
         override fun getAccessCode(code: String?, error: String?) {
-          if (error != null) { 
+          if (error != null) {
             result.error("ERROR", error, null);
-          } else { 
+          } else {
             result.success(code)
           }
         }
       })
     }
     else if(call.method=="access_token")
-    { 
+    {
       requestModel = getAuthenticationRequestModel(activity!!)
 
       getAccessToken(activity!!, requestModel, object : UAEPassAccessTokenCallback {
         override fun getToken(accessToken: String?, state: String, error: String?) {
-          if (error != null) { 
+          if (error != null) {
             result.error("ERROR", error, null);
-          } else { 
+          } else {
             result.success(accessToken)
           }
         }
@@ -213,7 +218,7 @@ class UaePassFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware,Plug
             RESPONSE_TYPE,
             ACR_VALUE,
             state!!,
-            Language.EN,
+            language,
 
         )
     }

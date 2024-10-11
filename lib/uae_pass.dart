@@ -11,16 +11,16 @@ class UaePass {
         "uaepassdemoappDS",
         "123123213",
         "https://oauthtest.com/authorization/return",
-        "urn:uae:digitalid:profile");
+        "urn:uae:digitalid:profile", "en");
   }
 
   Future<void> setUpEnvironment(
       String clientId, String clientSecret, String urlScheme, String state,
       {bool isProduction = false,
       String redirectUri = "https://oauthtest.com/authorization/return",
-      String scope = "urn:uae:digitalid:profile"}) async {
+      String scope = "urn:uae:digitalid:profile",  String language = "en"}) async {
     UaePassPlatform.instance.setUp(clientId, clientSecret, isProduction,
-        urlScheme, state, redirectUri, scope);
+        urlScheme, state, redirectUri, scope, language);
   }
 
   Future<String> signIn() async {
