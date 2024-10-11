@@ -37,6 +37,7 @@ public class UaePassPlugin: NSObject, FlutterPlugin {
         let redirectUriLogin = arguments["redirect_url"] as? String ?? "https://oauthtest.com/authorization/return"
         let state = arguments["state"] as! String
         let scope = arguments["scope"] as! String
+        let language = arguments["language"] as! String
 
        UAEPASSRouter.shared.environmentConfig = UAEPassConfig(clientID: clientID, clientSecret: clientSecret, env: env)
 
@@ -46,7 +47,8 @@ public class UaePassPlugin: NSObject, FlutterPlugin {
               state: state,
               successSchemeURL: redirectUriLogin + "://",
               failSchemeURL: redirectUriLogin + "://",
-              signingScope: "urn:safelayer:eidas:sign:process:document"
+              signingScope: "urn:safelayer:eidas:sign:process:document",
+              language: language
           )
       }
 
