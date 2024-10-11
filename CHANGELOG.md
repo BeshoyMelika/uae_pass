@@ -1,3 +1,7 @@
+## 0.0.7
+
+- Arabic language support
+
 ## 0.0.3
 
 - Android build issues fixed
