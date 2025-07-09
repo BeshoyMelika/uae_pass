@@ -34,7 +34,7 @@ public class UaePassPlugin: NSObject, FlutterPlugin {
         let clientSecret = arguments["client_secret"] as! String
         let environment = arguments["environment"] as! String
         let env = environment == "production" ? UAEPASSEnvirnonment.production : UAEPASSEnvirnonment.staging
-        let redirectUriLogin = arguments["redirect_url"] as? String ?? "https://hheo-gateway-stg.politewave-7a937208.uaenorth.azurecontainerapps.io/Identity/api/UaePass/login-mobile"
+        let redirectUriLogin = arguments["redirect_url"] as? String ?? "https://oauthtest.com/authorization/return"
         let state = arguments["state"] as! String
         let scope = arguments["scope"] as! String
         let language = arguments["language"] as! String
