@@ -36,7 +36,7 @@ class UaePassFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware,Plug
 
   private var client_id: String? = null
   private var client_secret: String? = null
-  private var redirect_url: String? = "https://oauthtest.com/authorization/return"
+  private var redirect_url: String? = "https://hheo-gateway-stg.politewave-7a937208.uaenorth.azurecontainerapps.io/Identity/api/UaePass/login-mobile"
   private var environment: Environment = Environment.STAGING
   private var state: String? = null
   private var scheme: String? = null
@@ -108,7 +108,7 @@ class UaePassFlutterPlugin: FlutterPlugin, MethodCallHandler, ActivityAware,Plug
       }
       if(redirect_url==null)
       {
-        redirect_url = "https://oauthtest.com/authorization/return"
+        redirect_url = "https://hheo-gateway-stg.politewave-7a937208.uaenorth.azurecontainerapps.io/Identity/api/UaePass/login-mobile"
       }
       if(state==null)
       {

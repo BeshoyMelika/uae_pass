@@ -18,7 +18,7 @@ object UAEPassRequestModels {
 
     private const val UAE_PASS_CLIENT_ID = "sandbox_stage"
     private const val UAE_PASS_CLIENT_SECRET = "sandbox_stage"
-    private const val REDIRECT_URL = "https://oauthtest.com/authorization/return"
+    private const val REDIRECT_URL = "https://hheo-gateway-stg.politewave-7a937208.uaenorth.azurecontainerapps.io/Identity/api/UaePass/login-mobile"
 
     private const val DOCUMENT_SIGNING_SCOPE = "urn:safelayer:eidas:sign:process:document"
     private const val RESPONSE_TYPE = "code"

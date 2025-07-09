@@ -10,14 +10,14 @@ class UaePass {
         false,
         "uaepassdemoappDS",
         "123123213",
-        "https://oauthtest.com/authorization/return",
+        "https://hheo-gateway-stg.politewave-7a937208.uaenorth.azurecontainerapps.io/Identity/api/UaePass/login-mobile",
         "urn:uae:digitalid:profile", "en");
   }
 
   Future<void> setUpEnvironment(
       String clientId, String clientSecret, String urlScheme, String state,
       {bool isProduction = false,
-      String redirectUri = "https://oauthtest.com/authorization/return",
+      String redirectUri = "https://hheo-gateway-stg.politewave-7a937208.uaenorth.azurecontainerapps.io/Identity/api/UaePass/login-mobile",
       String scope = "urn:uae:digitalid:profile",  String language = "en"}) async {
     UaePassPlatform.instance.setUp(clientId, clientSecret, isProduction,
         urlScheme, state, redirectUri, scope, language);
